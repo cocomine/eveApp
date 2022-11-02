@@ -7,3 +7,4 @@ node_modules/
 /plugins/
 /platforms/
 /eveApp.keystore
+/build.json
