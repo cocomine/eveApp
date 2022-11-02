@@ -1,0 +1,684 @@
+/*
+ * Copyright (c) 2021. By Cocomine
+ */
+
+/*
+ *      1. Toolbar
+ *          1.1 Toolbar首頁特別樣式(項目總額)
+ *      2. Navbar
+ *      3. Date part
+ *          3.1 Date part head
+ *          3.2 Date part body
+ *      4. Main container 正文內容
+ *      5. fab 右下角增加按鈕
+ *      6. adder 增加紀錄頁面
+ *      7. setting-part 設置頁面
+ *      8. export-part 匯出頁面
+ *      9. scrollbar-inner 滾動條樣式
+ *      10. backup-part 備份頁面
+ *      11. Table Swipe Interaction 表格滑動交互
+ *      12. bg-color 背景顏色
+ *      13. dropdown
+ */
+
+:root { /*參數設置*/
+    --primary-color: #127dff;
+    --dark-color: #232323;
+    --dark-color-light: #6c6c6c;
+    --bs-primary: var(--primary-color); !important;
+    --text-gary: #a0a0a0;
+}
+
+* {
+    -webkit-tap-highlight-color: var(--dark-color-light); /* make transparent link selection, adjust last value opacity 0 to 1.0 */
+}
+
+body {
+    background-color: var(--dark-color);
+    -webkit-touch-callout: none; /* prevent callout to copy image, etc when tap to hold */
+    -webkit-text-size-adjust: none; /* prevent webkit from resizing text to fit */
+    -webkit-user-select: none; /* prevent copy paste, to allow, change 'none' to 'text' */
+    font-family: system-ui, -apple-system, -apple-system-font, 'Microsoft JhengHei UI', 'Roboto', sans-serif;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    color: whitesmoke;
+    font-size: .9rem;
+}
+
+a { /*將所有超連結套用效果*/
+    text-decoration: none;
+    color: whitesmoke;
+!important;
+}
+
+.btn-primary { /*修改primary按鈕的顏色*/
+    background-color: var(--primary-color);
+}
+
+.btn-close {
+    color: whitesmoke;
+    background: transparent url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23F5F5F5' stroke='%23F5F5F5' %3e%3cpath d='M.293.293a1 1 0 011.414 0L8 6.586 14.293.293a1 1 0 111.414 1.414L9.414 8l6.293 6.293a1 1 0 01-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 01-1.414-1.414L6.586 8 .293 1.707a1 1 0 010-1.414z'/%3e%3c/svg%3e") center/1em auto no-repeat;
+}
+
+input.form-control:not([type="range"]),
+select.form-select,
+textarea.form-control { /*所有input range除外*/
+    background-color: rgba(0, 0, 0, 0);
+    border: solid var(--dark-color-light);
+    border-width: 0 0 1px 0;
+    color: whitesmoke;
+    border-radius: 0;
+}
+
+select.form-select { /*替換select background image*/
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='%2300000000' stroke='%23F5F5F5' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
+}
+
+input:not([type="range"]):not([role="switch"]):not([type="radio"]):not([type="checkbox"]):focus,
+select.form-select:focus,
+textarea.form-control:focus { /*所有input range除外 (聚焦狀態)*/
+    background-color: rgba(0, 0, 0, 0);
+    border: solid var(--primary-color);
+    border-width: 0 0 1px 0;
+    box-shadow: 0 0 0 0 black;
+    color: whitesmoke;
+    border-radius: 0;
+}
+
+.form-check-input:checked { /*切換按鈕*/
+    background-color: var(--primary-color);
+    border-color: whitesmoke;
+}
+
+.form-check-input:focus {
+    border-color: rgba(245, 245, 245, 0.51);
+    box-shadow: 0 0 0 0.25rem rgba(255, 255, 255, 0.25);
+}
+
+small { /*所有small套用效果*/
+    font-size: .7em;
+}
+
+.modal-content { /*彈出窗口*/
+    background-color: var(--dark-color);
+}
+
+.list-group-item { /*列表*/
+    color: whitesmoke;
+    background-color: var(--dark-color);
+}
+
+input[type="checkbox"],
+input[type="radio"] { /*checkbox & radio*/
+    background-color: rgba(0, 0, 0, 0);
+    border: 1px solid rgb(255, 255, 255);
+}
+
+.form-switch .form-check-input { /*切換按鈕*/
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='rgba%28255, 255, 255, 1%29'/%3e%3c/svg%3e");
+}
+
+/*
+ *      1. Toolbar 頂部工具欄
+ */
+
+.toolbar {
+    background-color: var(--primary-color);
+    width: 100%;
+    height: 2.8rem;
+}
+@media (min-width: 576px){ /*當闊度大於576px套用以下效果(打橫手機)*/
+    .toolbar{
+        height: 2.3rem;
+    }
+}
+
+.toolbar i + i{ /* 相鄰icon */
+    padding-left: 1.2rem;
+}
+
+.toolbar i{ /* icon */
+    font-size: 1.2em;
+}
+
+.toolbar .toolbar-text{ /*toolbar的文字*/
+    padding-right: 1em;
+    padding-left: 1em;
+}
+
+/*
+ *      1.1 Toolbar首頁特別樣式(項目總額)
+ */
+.toolbar #Item-Total{
+    font-size: .7em;
+}
+
+/*
+ *      2. Navbar 底部導航欄
+ */
+.navbar{
+    border-top: 1px solid var(--dark-color-light);
+    background-color: #1f1f1f;
+    overflow: hidden;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    z-index: 100;
+}
+
+.navbar > div { /*導航欄內的item*/
+    float: left;
+    display: block;
+    color: whitesmoke;
+    text-align: center;
+    padding: 1px 10px;
+    font-size: .7em;
+}
+
+.navbar > div i { /*item裏的icon*/
+    font-size: 1.7em;
+}
+
+.navbar > div > a { /*item裏的a*/
+    color: whitesmoke;
+}
+
+.navbar > div:first-child{ /*第一個item*/
+    margin-left: 2rem
+}
+
+.navbar > div:last-child{ /*最尾一個item*/
+    margin-right: 2rem
+}
+
+.navbar > .active *{/*觸發狀態*/
+    color: var(--primary-color);
+}
+
+/*
+ *      3. Date part 資料顯示部分
+ */
+.data-part{
+    border-top: 1px solid var(--dark-color-light);
+    background-color: #2a2a2a;
+    padding: 0 !important;
+    margin-bottom: .5rem;
+    overflow: hidden;
+    border-bottom: 1px solid var(--dark-color-light);
+}
+
+.data-part:last-child{
+    margin-bottom: 7rem;
+}
+
+/*
+ *      3.1 Date part head 頭部日期顯示部分
+ */
+.data-part > .data-head{
+    padding-left: .5rem;
+    padding-right: .5rem;
+    border-bottom: 1px solid var(--dark-color-light);
+}
+
+.data-part > .data-head > span{ /*裏面全部span*/
+    width: auto;
+    font-size: .7em;
+}
+
+.data-part > .data-head > span:first-child{ /*第一個span(日子顯示)*/
+    font-size: 1.5em;
+}
+
+.data-part > .data-head > .WD{ /*星期(平日)*/
+    background-color: var(--dark-color-light);
+}
+
+.data-part > .data-head > .ED{ /*星期(週末)*/
+    background-color: var(--primary-color);
+}
+
+.data-part > .data-head > .SD{ /*星期(週日)*/
+    background-color: var(--bs-danger);
+}
+
+.data-part > .data-head > span:nth-child(0n+2){ /*第二個span(星期顯示)*/
+    padding: 2px 3px 2px 3px;
+    border-radius: 5px;
+}
+
+.data-part > .data-head > span:last-child{ /*右手邊當天總金額顯示*/
+    font-size: 1em;
+    color: #5099ff;
+}
+
+/*
+ *      3.2 Date part body 中間內容顯示部分
+ */
+.data-part .data-body {
+    padding-left: .5rem;
+    padding-right: .5rem;
+    padding-top: .4rem;
+    transition: background-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+
+.data-part .data-body:active { /* 點擊 */
+    background-color: #494949;
+}
+
+.data-part .data-body > [data-col-type="Num-Type"] { /*單号&類型*/
+    color: var(--text-gary);
+}
+
+.data-part .data-body > [data-col-type="Num-Type"] > span:last-child { /*單号&類型裏面的最後一個span*/
+    font-size: .9em;
+}
+
+.data-part .data-body > [data-col-type="Remark"] > span { /*備註span*/
+    font-size: .9em;
+    color: var(--text-gary);
+    border-bottom: 2px dotted var(--dark-color-light);
+}
+
+.data-part .data-body > [data-col-type="Local-Cargo"] > span:last-child { /*地点&櫃号*/
+    font-size: .9em;
+    color: var(--text-gary);
+}
+
+.data-part .data-body > [data-col-type="Pay-on"] > div:first-child { /*代付*/
+    font-size: .8em;
+    padding-right: 0;
+    color: var(--text-gary);
+}
+
+.data-part .data-body > [data-col-type="Pay-on"] > div:last-child small, /*全部small元素*/
+.data-part .data-body > [data-col-type="Shipping"] small,
+.data-part .data-body > [data-col-type="Total"] small {
+    color: var(--text-gary);
+    font-size: .7em;
+}
+
+.data-part .data-body > [data-col-type="Shipping"] { /*運費*/
+    border-left: 1px dashed var(--dark-color-light);
+}
+
+.data-part .data-body > [data-col-type="Total"] { /*合計*/
+    text-align: right;
+    color: #5099ff;
+}
+
+/*
+ *      4. Main container 正文內容
+ */
+.main-container {
+    height: calc(100% - 3.2rem - 2.8rem);
+}
+
+.main-container-full { /*全版頁面*/
+    height: calc(100% - 2.8rem);
+}
+
+.main-container.index-page { /*首頁版面*/
+    height: calc(100% - 3.2rem - 2.8rem - 2.8rem);
+}
+
+@media (min-width: 576px) {
+    /*當闊度大於576px套用以下效果(打橫手機)*/
+    .main-container {
+        height: calc(100% - 3.2rem - 2.3rem);
+    }
+
+    .main-container-full { /*全版頁面*/
+        height: calc(100% - 2.3rem);
+    }
+
+    .main-container.index-page { /*首頁版面*/
+        height: calc(100% - 3.2rem - 2.3rem - 2.3rem);
+    }
+}
+
+/*
+ *      5. fab 右下角增加按鈕
+ */
+.fab {
+    width: 57px;
+    height: 57px;
+    position: fixed;
+    background-color: var(--primary-color);
+    border-radius: 100%;
+    bottom: 5rem;
+    right: 1rem;
+    z-index: 9999;
+}
+
+.fab div{ /*按鈕大細*/
+    width: 100%;
+    height: 100%;
+}
+
+.fab div > span, i{ /*按鈕icon*/
+    text-align: center;
+    font-size: 1em;
+    color: #f2f2f2;
+    font-weight: bold;
+}
+
+/*
+ *      6. adder 增加紀錄頁面
+ */
+.adder{
+    background-color: #2a2a2a;
+    border-bottom: 1px solid var(--dark-color-light);
+    border-top: 1px solid var(--dark-color-light);
+    padding-left: .5rem;
+    padding-right: .5rem;
+    overflow: hidden;
+}
+
+.adder.adder-submit > span:nth-child(n+2){ /*合計*/
+    color: var(--primary-color);
+    font-size: 1.4em;
+}
+
+#CargoCheckNum{ /*櫃號檢查碼*/
+    width: 3.7rem;
+}
+
+#CargoLetter{ /*櫃號前四位英文字*/
+    width: 6.5rem;
+    margin-left: .2rem;
+}
+
+.adder small{ /*輸入欄位下的small文字*/
+    color: var(--text-gary);
+    font-size: .7em;
+}
+
+/*
+ *      7. setting-part 設置頁面
+ */
+.setting-part > .setting-title { /*設置分類的標題*/
+    color: var(--text-gary);
+    font-size: .8em;
+}
+
+.setting-part > .setting-body { /*設置分類的內容*/
+    background-color: #2a2a2a;
+}
+
+.setting-part > .setting-body:nth-child(n+1), /*設置分類最前一個item*/
+.setting-part > .setting-body + .setting-body { /*設置分類相鄰item*/
+    border-top: 1px solid var(--dark-color-light);
+}
+
+.setting-part > .setting-body:nth-last-child(-n+1) { /*設置分類最後一個item*/
+    border-bottom: 1px solid var(--dark-color-light);
+}
+
+.setting-part > .setting-body small { /*設置分類的內容裏面的small*/
+    color: var(--text-gary);
+    font-size: .7em;
+}
+
+.setting-part > .setting-body > i { /*設置分類的內容裏面的icon*/
+    font-size: 1.9em;
+}
+
+.setting-part > .setting-body:active{ /*設置分類的內容 點擊*/
+    background-color: #494949;
+}
+
+/*
+ *      8. export-part 匯出頁面
+ */
+.export-part > .export-body{ /*匯出頁面的內容*/
+    padding-left: .5rem;
+    padding-right: .5rem;
+}
+
+.export-part > .export-title{ /*匯出頁面的標題*/
+    font-size: 1.4em;
+    color: var(--text-gary);
+}
+
+/*
+ *      9. scrollbar-inner 滾動條樣式
+ */
+.scrollbar-inner > .scroll-element,
+.scrollbar-inner > .scroll-element div
+{
+    border: none;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    z-index: 10;
+}
+
+.scrollbar-inner > .scroll-element div {
+    display: block;
+    height: 100%;
+    left: 0;
+    top: 0;
+    width: 100%;
+}
+
+.scrollbar-inner > .scroll-element.scroll-x {
+    bottom: 2px;
+    height: 8px;
+    left: 0;
+    width: 100%;
+}
+
+.scrollbar-inner > .scroll-element.scroll-y {
+    height: 100%;
+    right: 2px;
+    top: 0;
+    width: 2px;
+}
+
+.scrollbar-inner > .scroll-element .scroll-element_outer {
+    overflow: hidden;
+}
+
+.scrollbar-inner > .scroll-element .scroll-element_outer,
+.scrollbar-inner > .scroll-element .scroll-element_track,
+.scrollbar-inner > .scroll-element .scroll-bar {
+    border-radius: 2px;
+}
+
+.scrollbar-inner > .scroll-element .scroll-element_track,
+.scrollbar-inner > .scroll-element .scroll-bar {
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=40)";
+    filter: alpha(opacity=40);
+    opacity: 0.4;
+}
+
+.scrollbar-inner > .scroll-element .scroll-element_track {
+    background-color: rgba(224, 224, 224, 0);
+}
+
+.scrollbar-inner > .scroll-element .scroll-bar {
+    background-color: rgba(255, 255, 255, 0.7);
+}
+
+.scrollbar-inner > .scroll-element:hover .scroll-bar {
+    background-color: rgb(255, 255, 255);
+}
+
+.scrollbar-inner > .scroll-element.scroll-draggable .scroll-bar {
+    background-color: rgba(255, 255, 255, 0.7);
+}
+
+/* update scrollbar offset if both scrolls are visible */
+.scrollbar-inner > .scroll-element.scroll-x.scroll-scrolly_visible .scroll-element_track {
+    left: -12px;
+}
+
+.scrollbar-inner > .scroll-element.scroll-y.scroll-scrollx_visible .scroll-element_track {
+    top: -12px;
+}
+
+.scrollbar-inner > .scroll-element.scroll-x.scroll-scrolly_visible .scroll-element_size {
+    left: -12px;
+}
+
+.scrollbar-inner > .scroll-element.scroll-y.scroll-scrollx_visible .scroll-element_size {
+    top: -12px;
+}
+
+/*
+ *      10. backup-part 備份頁面
+ */
+.backup-part > .backup-detail { /*詳細介紹部分*/
+    border-bottom: 1px solid var(--dark-color-light);
+    padding: 1rem 1rem 0;
+    background-color: #2a2a2a;
+}
+
+.backup-part > .backup-buttons { /*按鈕部分*/
+    padding-top: .4rem;
+    border-top: 1px solid var(--dark-color-light);
+    background-color: #2a2a2a;
+}
+
+.backup-part > .backup-detail a { /*裏面的a元素*/
+    text-decoration: underline;
+}
+
+.backup-part > .backup-detail a:visited { /*裏面的a元素(以訪問)*/
+    color: var(--primary-color);
+}
+
+.backup-part > .backup-detail blockquote { /*裏面的引言元素*/
+    background-color: var(--dark-color);
+    margin: 0 .5rem 1rem .5rem;
+    padding: .5rem;
+    width: auto;
+}
+
+/*
+ *      11. Table Swipe Interaction 表格滑動交互
+ *      Thx: https://dev.to/eduferfer/how-to-css-table-swipe-interaction-3ih3
+ */
+.swipe-container {
+    display: flex;
+    overflow: auto;
+    overflow-x: scroll;
+    scroll-snap-type: x mandatory;
+}
+
+/* scrollbar should be hidden */
+.swipe-container::-webkit-scrollbar {
+    display: none;
+}
+
+/* main element should always snap into view */
+.swipe-element {
+    scroll-snap-align: start;
+}
+
+/* actions and element should be 100% wide */
+.action,
+.swipe-element {
+    min-width: 100%;
+}
+
+.action {
+    display: flex;
+    align-items: center;
+}
+
+/* icon should remain sticky */
+.action i {
+    color: white;
+    position: sticky;
+    left: 16px;
+    right: 16px;
+    font-size: 2.5rem;
+}
+
+/* action background colors */
+.action.left {
+    background-color: cornflowerblue;
+    padding-right: 10px;
+}
+
+.action.right {
+    justify-content: flex-end;
+    background-color: indianred;
+    padding-left: 10px;
+}
+
+/* 12. background-color 背景顏色 */
+.bg-primary {background-color: var(--primary-color) !important;}
+.bg-yellow {background-color: var(--bs-yellow) !important; color: var(--bs-dark) !important;}
+
+.bg-orange {
+    background-color: var(--bs-orange) !important;
+}
+
+.bg-red {
+    background-color: var(--bs-red) !important;
+}
+
+.bg-green {
+    background-color: var(--bs-green) !important;
+}
+
+.bg-teal {
+    background-color: var(--bs-teal) !important;
+    color: var(--bs-dark) !important;
+}
+
+.bg-cyan {
+    background-color: var(--bs-cyan) !important;
+}
+
+.bg-blue {
+    background-color: var(--bs-blue) !important;
+}
+
+.bg-purple {
+    background-color: var(--bs-purple) !important;
+}
+
+.bg-pink {
+    background-color: var(--bs-pink) !important;
+}
+
+.bg-gray {
+    background-color: var(--bs-gray) !important;
+}
+
+.bg-white {
+    background-color: var(--bs-white) !important;
+    color: var(--bs-dark) !important;
+}
+
+/* 13. dropdown */
+.dropdown-menu {
+    background-color: var(--dark-color);
+    color: whitesmoke;
+    max-height: 200px;
+    overflow: auto;
+    border: none;
+    background-clip: border-box;
+}
+
+.dropdown-item {
+    color: whitesmoke;
+}
+
+/* dropdown scrollbar */
+.dropdown-menu::-webkit-scrollbar {
+    width: 2px;
+    background-color: transparent;
+}
+
+.dropdown-menu::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+.dropdown-menu::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0.7);
+}

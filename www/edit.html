@@ -1,0 +1,185 @@
+<!--
+  ~ Copyright (c) 2021. By Cocomine
+  -->
+
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="utf-8">
+    <!--
+    Customize this policy to fit your own app's needs. For more guidance, see:
+        https://github.com/apache/cordova-plugin-whitelist/blob/master/README.md#content-security-policy
+    Some notes:
+        * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
+        * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
+        * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
+            * Enable inline JS: add 'unsafe-inline' to default-src
+    -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:; script-src 'self' 'unsafe-inline';">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
+    <meta name="color-scheme" content="light dark">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/themify-icons.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/bootstrap-icons.css">
+    <link rel="stylesheet" href="css/jquery.scrollbar.css">
+    <link rel="stylesheet" href="css/style.css">
+    <title>運輸記錄</title>
+    <link rel="icon" href="img/logo.png">
+</head>
+<body>
+
+<!--頂部toolbar-->
+<div class="toolbar sticky-top shadow">
+    <div class="container-fluid h-100">
+        <div class="row justify-content-between align-items-center h-100">
+            <div class="col">
+                <a href="index.html" aria-label="返回首頁">
+                    <span class="ti-arrow-left"></span>
+                </a>
+                <span class="toolbar-text">修改紀錄</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--正文-->
+<div class="scrollbar-inner main-container-full">
+    <div class="container-fluid">
+        <div class="row">
+            <form class="needs-validation g-0" novalidate id="edit-form">
+                <div class="col-12 pt-2 adder">
+                    <div class="row mb-3">
+                        <label for="DateTime" class="col-2 col-form-label">日期</label>
+                        <div class="col">
+                            <input type="date" class="form-control" id="DateTime" name="DateTime" required>
+                            <div class="invalid-feedback">
+                                請提供正確日期 e.x: 01/06/2021
+                            </div>
+                        </div>
+                        </div>
+                    <div class="row mb-3">
+                        <label for="OrderNum" class="col-2 col-form-label">單號</label>
+                        <div class="col">
+                            <input type="text" autofocus inputmode="numeric" class="form-control" id="OrderNum" name="OrderNum" pattern="([0-9]{2}\/){2}[0-9]{3}" maxlength="9" placeholder="03/09/020">
+                            <div class="invalid-feedback" id="OrderNuminvalid">
+                                請提供正確單號 e.x: 03/09/020
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="Type" class="col-2 col-form-label">類型</label>
+                        <div class="col">
+                            <select class="form-select" required id="Type" name="Type">
+                                <option selected disabled hidden value="">請選擇類型</option>
+                                <option>20</option>
+                                <option>40</option>
+                                <option>45</option>
+                            </select>
+                            <div class="invalid-feedback">
+                                請選擇類型
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-3 g-1">
+                        <label for="CargoLetter" class="col-2 col-form-label">櫃號</label>
+                        <div class="col-auto position-relative">
+                            <input type="text" aria-label="櫃號前四位英文字" class="form-control" id="CargoLetter" name="CargoLetter" required pattern="[A-Z]{4}" placeholder="FSCU" maxlength="4">
+                            <div class="invalid-feedback">
+                                櫃號前四位英文字 e.x: FSCU
+                            </div>
+                        </div>
+                        <div class="col position-relative">
+                            <input type="text" inputmode="numeric" aria-label="櫃號中間6位數字" class="form-control" id="CargoNum" name="CargoNum" required pattern="[0-9]{6}" placeholder="512883" maxlength="6">
+                            <div class="invalid-feedback">
+                                櫃號中間6位數字 e.x: 512883
+                            </div>
+                        </div>
+                        <div class="col-auto row position-relative g-0">
+                            <span class="col-auto" style="font-size: 1.5em">(</span>
+                            <input type="text" inputmode="numeric" aria-label="櫃號括號內數字" class="form-control" id="CargoCheckNum" name="CargoCheckNum" pattern="[0-9]{1}" required placeholder="7" maxlength="1">
+                            <div class="invalid-feedback">
+                                櫃號括號內數字 e.x: 7
+                            </div>
+                            <span  class="col-auto" style="font-size: 1.5em">)</span>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="Local" class="col-2 col-form-label">地點</label>
+                        <div class="col">
+                            <div class="dropdown">
+                                <input type="text" class="form-control" id="Local" name="Local" data-bs-toggle="dropdown" aria-expanded="false" autocomplete="off" required>
+                                <ul class="dropdown-menu dropdown-menu-dark" id="Local-auto">
+                                </ul>
+                                <div class="invalid-feedback">
+                                    請提供正確地點
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="RMB" class="col-2 col-form-label" style="padding-right: 0">人民幣</label>
+                        <div class="col">
+                            <input type="number" inputmode="decimal" class="form-control" id="RMB" name="RMB" placeholder="CN¥ --" step="0.01" pattern="[0-9]+\.[0-9]*">
+                            <small id="Rates">匯率: 1 港幣 = 0.000 人民幣</small>
+                            <div class="invalid-feedback">
+                                請正確提供銀碼 e.x: 734.88
+                            </div>
+                        </div>
+                        <label for="RMB" class="col-auto col-form-label">折算 HK$ 00.00</label>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="HKD" class="col-2 col-form-label">港幣</label>
+                        <div class="col">
+                            <input type="number" inputmode="decimal" class="form-control" id="HKD" name="HKD" placeholder="HK$ --" step="0.01" pattern="[0-9]+\.[0-9]*">
+                            <div class="invalid-feedback">
+                                請正確提供銀碼 e.x: 374.88
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="Add" class="col-2 col-form-label">加收</label>
+                        <div class="col">
+                            <input type="number" inputmode="decimal" class="form-control" id="Add" name="Add" placeholder="HK$ --" step="0.01" pattern="[0-9]+\.[0-9]*">
+                            <div class="invalid-feedback">
+                                請正確提供銀碼 e.x: 349.88
+                            </div>
+                        </div>
+                        <label for="Shipping" class="col-2 col-form-label">運費</label>
+                        <div class="col">
+                            <input type="number" inputmode="decimal" class="form-control" id="Shipping" name="Shipping" placeholder="HK$ --" step="0.01" pattern="[0-9]+\.[0-9]*">
+                            <div class="invalid-feedback">
+                                請正確提供銀碼 e.x: 340.88
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 mt-2 adder pt-2 g-0 pb-2 adder-submit align-items-center">
+                    <input type="text" class="form-control" id="Remark" name="Remark" placeholder="備註" maxlength="50">
+                </div>
+                <input type="text" name="RecordID" id="RecordID" style="display: none" aria-label="">
+                <div class="col-12 mt-2 adder pt-2 row g-0 pb-2 adder-submit align-items-center">
+                    <span class="col">合計 </span>
+                    <span class="col-auto" id="Total">HK$ 00.00</span>
+                    <div class="w-100"></div>
+                    <button type="submit" class="btn btn-primary col m-1"><i class="bi bi-save2"></i> &nbsp;&nbsp;儲存
+                    </button>
+                    <button class="btn btn-outline-light col m-1" id="Delete"><i class="bi bi-trash"></i> &nbsp;&nbsp;刪除
+                    </button>
+                    <button class="btn btn-outline-light col m-1" id="Copy"><i class="fa fa-copy"></i> &nbsp;&nbsp;複製
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script src="cordova.js"></script>
+<script src="js/jquery-3.6.0.min.js"></script>
+<script src="js/bootstrap.bundle.min.js"></script>
+<script src="js/jquery.scrollbar.min.js"></script>
+<script src="js/global.js"></script>
+<script src="js/edit.js"></script>
+</body>
+</html>

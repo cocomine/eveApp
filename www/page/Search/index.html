@@ -1,0 +1,119 @@
+<!--
+  ~ Copyright (c) 2022. By Cocomine
+  -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:; script-src 'self' 'unsafe-inline';">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
+    <meta name="color-scheme" content="light dark">
+    <link rel="stylesheet" href="../../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../css/themify-icons.css">
+    <link rel="stylesheet" href="../../css/font-awesome.min.css">
+    <link rel="stylesheet" href="../../css/bootstrap-icons.css">
+    <link rel="stylesheet" href="../../css/jquery.scrollbar.css">
+    <link rel="stylesheet" href="../../css/page/search.css">
+    <link rel="stylesheet" href="../../css/style.css">
+    <title>運輸記錄</title>
+</head>
+<body>
+<!--頂部toolbar-->
+<div class="sticky-top" id="toolbar">
+    <div class="toolbar" style="background-color: darkslateblue">
+        <div class="container-fluid h-100">
+            <div class="row justify-content-between align-items-center h-100">
+                <div class="col-auto">
+                    <a href="/index.html" aria-label="返回主頁">
+                        <span class="ti-arrow-left"></span>
+                    </a>
+                </div>
+
+                <div class="col-auto" id="all-mode" style="display: none">
+                    <span class="toolbar-text">全部</span>
+                </div>
+                <div class="col-auto" id="week-mode" style="display: none">
+                    <a class="ti-angle-left" aria-label="上一週" id="Last-week"></a>
+                    <span id="week" class="toolbar-text">0.0.0000 ~ 0.0</span>
+                    <a class="ti-angle-right text-right" aria-label="下一週" id="Next-week"></a>
+                </div>
+                <div class="col-auto" id="month-mode" data-show="1">
+                    <a class="ti-angle-left" aria-label="上一月" id="Last-month"></a>
+                    <span id="month" class="toolbar-text">0月 0000</span>
+                    <a class="ti-angle-right text-right" aria-label="下一月" id="Next-month"></a>
+                </div>
+                <div class="col-auto" id="year-mode" style="display: none">
+                    <a class="ti-angle-left" aria-label="上一年" id="Last-year"></a>
+                    <span id="year" class="toolbar-text">0000</span>
+                    <a class="ti-angle-right text-right" aria-label="下一年" id="Next-year"></a>
+                </div>
+                <div class="col-auto" id="custom-mode" style="display: none">
+                    <input type="date" id="custom-mode-start" value="2022-01-01" aria-label="開始日期">
+                    ~
+                    <input type="date" id="custom-mode-end" value="2022-01-01" aria-label="結束日期">
+                </div>
+
+
+                <div class="col-auto">
+                    <div class="dropdown">
+                        <button class="btn btn-outline-light dropdown-toggle" type="button" id="dropdownMenu" data-bs-toggle="dropdown" aria-expanded="false">
+                            月
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu">
+                            <li><a class="dropdown-item" data-mode="all-mode">全部</a></li>
+                            <li><a class="dropdown-item" data-mode="week-mode">週</a></li>
+                            <li><a class="dropdown-item" data-mode="month-mode">月</a></li>
+                            <li><a class="dropdown-item" data-mode="year-mode">年</a></li>
+                            <li><a class="dropdown-item" data-mode="custom-mode">自訂</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="toolbar" style="background-color: darkslateblue">
+        <div class="container-fluid h-100">
+            <div class="row align-items-center h-100">
+                <div class="col-12">
+                    <div class="search row m-1 p-1 p-sm-0">
+                        <div class="col-auto"><i class="bi bi-search"></i></div>
+                        <div class="col"><input type="text" id="search" aria-label="搜尋"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="shadow toolbar" style="background-color: darkslateblue">
+        <div class="container-fluid h-100">
+            <div class="row justify-content-between align-items-center h-100 text-center" id="Item-Total">
+                <div class="col">人民幣<br>¥ <span></span></div>
+                <div class="col">港幣<br>$ <span></span></div>
+                <div class="col">加收<br>$ <span></span></div>
+                <div class="col">運費<br>$ <span></span></div>
+                <div class="col">總計<br>$ <span></span></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--正文-->
+<div class="main-container scrollbar-inner index-page">
+    <div class="container-fluid h-100">
+        <div class="row" id="Content">
+
+        </div>
+    </div>
+</div>
+
+<script src="../../cordova.js"></script>
+<script src="../../js/jquery-3.6.0.min.js"></script>
+<script src="../../js/bootstrap.bundle.min.js"></script>
+<script src="../../js/jquery.scrollbar.min.js"></script>
+<script src="../../js/global.js"></script>
+<script src="../../js/moment-with-locales.min.js"></script>
+<script src="../../js/page/Search/index.js"></script>
+</body>
+</html>

@@ -1,0 +1,183 @@
+/*
+ * Copyright (c) 2021. By Cocomine
+ */
+/*
+ *  1. 備忘錄表列
+ *      1.1 備忘錄表列顏色
+ *  2. 備忘錄按鈕
+ *  3. 備忘錄顯示部分
+ *      3.1 頭部日期顯示部分
+ *      3.2 中間內容顯示部分
+ */
+/* 1. 備忘錄表列 */
+.data-note {
+    border-bottom: 1px solid var(--dark-color-light);
+    padding-top: .3rem;
+    padding-bottom: .3rem;
+}
+
+/*預設*/
+.data-note > ul {
+    margin-bottom: 0;
+    list-style: disc;
+    font-size: .7em;
+}
+
+.data-note li::marker {
+    font-size: .8rem;
+}
+
+.data-note a {
+    width: 100%;
+    display: block;
+}
+
+/* 1.1 備忘錄表列顏色 */
+.data-note .note-none {
+    list-style: circle;
+}
+
+.data-note .note-none::marker {
+    color: var(--primary-color) !important;
+}
+
+.data-note .note-yellow::marker {
+    color: var(--bs-yellow) !important;
+}
+
+.data-note .note-orange::marker {
+    color: var(--bs-orange) !important;
+}
+
+.data-note .note-red::marker {
+    color: var(--bs-red) !important;
+}
+
+.data-note .note-green::marker {
+    color: var(--bs-green) !important;
+}
+
+.data-note .note-teal::marker {
+    color: var(--bs-teal) !important;
+}
+
+.data-note .note-cyan::marker {
+    color: var(--bs-cyan) !important;
+}
+
+.data-note .note-blue::marker {
+    color: var(--bs-blue) !important;
+}
+
+.data-note .note-purple::marker {
+    color: var(--bs-purple) !important;
+}
+
+.data-note .note-pink::marker {
+    color: var(--bs-pink) !important;
+}
+
+.data-note .note-gray::marker {
+    color: var(--bs-gray) !important;
+}
+.data-note .note-white::marker {color: var(--bs-white) !important;}
+
+/* 2. 備忘錄按鈕 */
+.fab.note-fab {
+    width: 40px;
+    height: 40px;
+    background-color: var(--bs-secondary);
+    right: 5.5rem;
+}
+
+.fab.note-fab div > i{ /*按鈕icon*/
+    text-align: center;
+    font-size: 1.3em;
+    color: #f2f2f2;
+    font-weight: bold;
+}
+
+/* 3. 備忘錄顯示部分 */
+.note-part{
+    padding-top: 1.5rem;
+}
+
+.note-part:last-child{
+    margin-bottom: 7rem;
+}
+
+/* 3.1 頭部日期顯示部分 */
+.note-part > .note-head{
+    color: var(--text-gary);
+}
+
+/* 3.2 中間內容顯示部分 */
+.note-part > .note-body {
+    background-color: #2a2a2a;
+    padding: .8rem;
+}
+
+.note-part > .note-body .note-body.card-title {
+    font-weight: 900;
+    font-size: 1.2em;
+}
+
+.note-part > .note-body > .card-text {
+    white-space: pre-line;
+/ / 換行符號換行
+}
+
+.note-part > .note-body + .note-body {
+    margin-top: .5rem;
+}
+
+/* 4. 備忘錄表格 */
+
+/* 4.1 備忘錄日期 */
+#note-form .date-pick > input {
+    border: 0;
+    color: var(--text-gary);
+}
+
+/* 4.2 備忘錄Title */
+#note-form .title-input{
+    padding-top: .5rem;
+}
+
+#note-form .title-input > input{
+    border: 0;
+    font-weight: 900;
+}
+
+/* 4.3 備忘錄content */
+#note-form .content-input{
+    padding-top: .5rem;
+}
+
+#note-form .content-input > textarea {
+    border: 0;
+    box-sizing: border-box;
+    height: 100%;
+    resize: none;
+    border-radius: 5px;
+}
+
+/* 4.5 顏色選擇 */
+.note-colo-sel-opt {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-left: .5rem;
+    margin-right: .5rem;
+    margin-top: .5rem;
+    transition: box-shadow .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+
+.note-colo-sel-opt:not([class^="bg-"]) {
+    border: var(--primary-color) solid 2px;
+}
+
+.note-colo-sel-opt.active {
+    box-shadow: 0 0 0 .35rem rgba(13, 110, 253, 0.42);
+}

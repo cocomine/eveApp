@@ -1,0 +1,104 @@
+<!--
+  ~ Copyright (c) 2021. By Cocomine
+  -->
+
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="utf-8">
+    <!--
+    Customize this policy to fit your own app's needs. For more guidance, see:
+        https://github.com/apache/cordova-plugin-whitelist/blob/master/README.md#content-security-policy
+    Some notes:
+        * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
+        * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
+        * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
+            * Enable inline JS: add 'unsafe-inline' to default-src
+    -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:; script-src 'self' 'unsafe-inline';">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
+    <meta name="color-scheme" content="light dark">
+    <link rel="stylesheet" href="../../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../css/themify-icons.css">
+    <link rel="stylesheet" href="../../css/font-awesome.min.css">
+    <link rel="stylesheet" href="../../css/bootstrap-icons.css">
+    <link rel="stylesheet" href="../../css/jquery.scrollbar.css">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/page/Notepad.css">
+    <title>備忘錄</title>
+    <!--link rel="icon" href="../../img/logo.png"-->
+</head>
+<body>
+
+<!--底部導航bar-->
+<div class="navbar">
+    <div>
+        <a href="../../index.html">
+            <i class="fa fa-book"></i><br>
+            紀錄</a>
+    </div>
+    <div>
+        <a href="../../export.html">
+            <i class="fa fa-file-pdf-o"></i><br>
+            匯出</a>
+    </div>
+    <div>
+        <a href="../../backup.html">
+            <i class="fa fa-cloud-upload"></i><br>
+            備份</a>
+    </div>
+    <div>
+        <a href="../../setting.html">
+            <i class="fa fa-gear"></i><br>
+            設定</a>
+    </div>
+</div>
+
+<div class="fab shadow">
+    <a href="note.html" aria-label="增加備忘錄">
+        <div class="row justify-content-center align-items-center g-0">
+            <i class="bi bi-journal-plus" style="font-size: 1.7em;"></i>
+        </div>
+    </a>
+</div>
+
+<!--頂部toolbar-->
+<div class="shadow sticky-top" id="toolbar">
+    <div class="toolbar">
+        <div class="container-fluid h-100">
+            <div class="row justify-content-between align-items-center h-100">
+                <div class="col-auto">
+                    <a href="./index.html" aria-label="返回首頁">
+                        <span class="ti-arrow-left"></span>
+                    </a>
+                    <span class="toolbar-text">備忘錄</span>
+                </div>
+                <div class="col-auto">
+                    <a class="ti-angle-left" aria-label="上一個月" id="Last-month"></a>
+                    <span id="month" class="toolbar-text">0月 0000</span>
+                    <a class="ti-angle-right text-right" aria-label="下一個月" id="Next-month"></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--正文-->
+<div class="main-container scrollbar-inner">
+    <div class="container-fluid h-100">
+        <div class="row h-100" id="Content">
+
+        </div>
+    </div>
+</div>
+<script src="../../cordova.js"></script>
+<script src="../../js/jquery-3.6.0.min.js"></script>
+<script src="../../js/bootstrap.bundle.min.js"></script>
+<script src="../../js/jquery.scrollbar.min.js"></script>
+<script src="../../js/global.js"></script>
+<script src="../../js/page/Notepad/index.js"></script>
+<script src="../../js/moment-with-locales.min.js"></script>
+</body>
+</html>

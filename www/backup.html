@@ -1,0 +1,162 @@
+<!--
+  ~ Copyright (c) 2021. By Cocomine
+  -->
+
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="utf-8">
+    <!--
+    Customize this policy to fit your own app's needs. For more guidance, see:
+        https://github.com/apache/cordova-plugin-whitelist/blob/master/README.md#content-security-policy
+    Some notes:
+        * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
+        * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
+        * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
+            * Enable inline JS: add 'unsafe-inline' to default-src
+    -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:; script-src 'self' 'unsafe-inline' https://apis.google.com/; connect-src https://www.googleapis.com 'self'; frame-src https://accounts.google.com/">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
+    <meta name="color-scheme" content="light dark">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/themify-icons.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/jquery.scrollbar.css">
+    <link rel="stylesheet" href="css/style.css">
+    <title>運輸記錄</title>
+</head>
+<body>
+
+<!--頂部toolbar-->
+<div class="toolbar sticky-top shadow">
+    <div class="container-fluid h-100">
+        <div class="row justify-content-between align-items-center h-100">
+            <div class="col-auto">
+                <span class="toolbar-text">備份</span>
+            </div>
+            <a class="col-auto" id="Logout-google" style="display: none">斷開連接</a>
+        </div>
+    </div>
+</div>
+
+<!--底部導航bar-->
+<div class="navbar">
+    <div>
+        <a href="index.html">
+            <i class="fa fa-book"></i><br>
+            紀錄</a>
+    </div>
+    <div>
+        <a href="export.html">
+            <i class="fa fa-file-pdf-o"></i><br>
+            匯出</a>
+    </div>
+    <div class="active">
+        <a href="#">
+            <i class="fa fa-cloud-upload"></i><br>
+            備份</a>
+    </div>
+    <div>
+        <a href="setting.html">
+            <i class="fa fa-gear"></i><br>
+            設定</a>
+    </div>
+</div>
+
+<!--彈出視窗-->
+<div class="modal fade" tabindex="-1" id="backupList">
+    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">選擇要復原的檔案</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <ul class="list-group list-group-flush"></ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--正文-->
+<div class="main-container">
+    <div class="container-fluid h-100 p-0">
+        <div class="row g-0 h-100 align-content-between backup-part">
+            <div class="col-12 backup-detail">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="row justify-content-between align-content-end">
+                            <h2 class="col-auto m-0">Google雲端備份</h2>
+                            <div class="col-auto">
+                                <img src="img/google-drive-logo2.png" alt="Google雲端" class="justify-content-end" style="width: 141.91px;height: 38.67px;">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 mt-3">
+                        <p>你可以手動將資料備份至google雲端硬碟。你可以隨時從google雲端硬碟中恢復資料。</p>
+                    </div>
+                    <div class="col-12">
+                        <blockquote class="row g-0" id="User-detail">
+                            <div class="col-4">最新備份:</div>
+                            <div class="col text-truncate"></div>
+                            <div class="w-100"></div>
+                            <div class="col-4">URL:</div>
+                            <div class="col text-truncate">
+                                <a href="https://drive.google.com">https://drive.google.com</a></div>
+                            <div class="w-100"></div>
+                            <div class="col-4">Email:</div>
+                            <div class="col text-truncate"></div>
+                        </blockquote>
+                    </div>
+                    <div class="col-12 pb-2" id="AutoBackup" style="display: none">
+                        <div class="row justify-content-between">
+                            <div class="col-auto">
+                                自動備份:
+                            </div>
+                            <div class="col-auto">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" role="switch" id="AutoBackup-switch">
+                                    <label class="form-check-label" for="AutoBackup-switch">啟用</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row justify-content-center">
+                            <div class="form-check col-auto">
+                                <input class="form-check-input" type="radio" name="AutoBackup" id="AutoBackup-day" value="Day">
+                                <label class="form-check-label" for="AutoBackup-day">每日</label>
+                            </div>
+                            <div class="col-2"></div>
+                            <div class="form-check col-auto">
+                                <input class="form-check-input" type="radio" name="AutoBackup" id="AutoBackup-week" value="Week">
+                                <label class="form-check-label" for="AutoBackup-week">每週</label>
+                            </div>
+                            <div class="col-2"></div>
+                            <div class="form-check col-auto">
+                                <input class="form-check-input" type="radio" name="AutoBackup" id="AutoBackup-month" value="Month">
+                                <label class="form-check-label" for="AutoBackup-month">每月</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 mt-2 pt-2 row g-0 pb-2 align-items-center backup-buttons" id="Connect">
+                <button class="btn btn-success col m-1" id="Login-Google">連接</button>
+            </div>
+            <div class="col-12 mt-2 pt-2 row g-0 pb-2 align-items-center backup-buttons" style="display: none" id="Connected">
+                <button class="btn btn-outline-primary col m-1" id="Recover">恢復</button>
+                <button class="btn btn-primary col m-1" id="Backup">備份</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="cordova.js"></script>
+<script src="js/jquery-3.6.0.min.js"></script>
+<script src="js/bootstrap.bundle.min.js"></script>
+<script src="js/jquery.scrollbar.min.js"></script>
+<script src="js/global.js"></script>
+<script src="js/moment-with-locales.min.js"></script>
+<script src="js/backup.js"></script>
+</body>
+</html>

@@ -1,0 +1,122 @@
+<!--
+  ~ Copyright (c) 2021. By Cocomine
+  -->
+
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="utf-8">
+    <!--
+    Customize this policy to fit your own app's needs. For more guidance, see:
+        https://github.com/apache/cordova-plugin-whitelist/blob/master/README.md#content-security-policy
+    Some notes:
+        * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
+        * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
+        * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
+            * Enable inline JS: add 'unsafe-inline' to default-src
+    -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:; script-src 'self' 'unsafe-inline';">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
+    <meta name="color-scheme" content="light dark">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/themify-icons.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/jquery.scrollbar.css">
+    <link rel="stylesheet" href="css/style.css">
+    <title>運輸記錄</title>
+    <link rel="icon" href="img/logo.png">
+</head>
+<body>
+
+<!--頂部toolbar-->
+<div class="toolbar sticky-top shadow">
+    <div class="container-fluid h-100">
+        <div class="row justify-content-between align-items-center h-100">
+            <div class="col">
+                <span class="toolbar-text">匯出</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--底部導航bar-->
+<div class="navbar">
+    <div>
+        <a href="index.html">
+            <i class="fa fa-book"></i><br>
+            紀錄</a>
+    </div>
+    <div class="active">
+        <a href="#">
+            <i class="fa fa-file-pdf-o"></i><br>
+            匯出</a>
+    </div>
+    <div>
+        <a href="backup.html">
+            <i class="fa fa-cloud-upload"></i><br>
+            備份</a>
+    </div>
+    <div>
+        <a href="setting.html">
+            <i class="fa fa-gear"></i><br>
+            設定</a>
+    </div>
+</div>
+
+<!--正文-->
+<div class="main-container">
+    <div class="container-fluid h-100 p-0">
+        <div class="row align-items-center h-100 g-0">
+            <div class="col export-part">
+                <div class="col-12 text-center export-title pb-2">選擇匯出月份</div>
+                <form class="needs-validation g-0" novalidate>
+                    <div class="col-12 row export-body pb-1 gx-1 justify-content-center">
+                        <div class="col-auto">
+                            <select class="form-select" aria-label="月份" required name="Month" id="Month">
+                                <option selected disabled hidden>月份</option>
+                                <option value="01">1月</option>
+                                <option value="02">2月</option>
+                                <option value="03">3月</option>
+                                <option value="04">4月</option>
+                                <option value="05">5月</option>
+                                <option value="06">6月</option>
+                                <option value="07">7月</option>
+                                <option value="08">8月</option>
+                                <option value="09">9月</option>
+                                <option value="10">10月</option>
+                                <option value="11">11月</option>
+                                <option value="12">12月</option>
+                            </select>
+                        </div>
+                        <div class="col-auto">
+                            <select class="form-select" aria-label="年份" required name="Year" id="Year">
+                                <option selected disabled hidden>年份</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-12 export-part export-body pt-2 pb-1 row g-0 align-items-center">
+                        <button id="SendEmail" class="btn btn-outline-primary col m-1">以電郵傳送</button>
+                        <button type="submit" class="btn btn-primary col m-1">匯出 或 打印</button>
+                        <div class="w-100"></div>
+                        <div class="col form-check m-1" style="font-size: 1.1em">
+                            <input type="checkbox" class="form-check-input" id="output-remark" name="output-remark">
+                            <label for="output-remark" class="form-check-label">包含備註</label>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+<script src="cordova.js"></script>
+<script src="js/jquery-3.6.0.min.js"></script>
+<script src="js/bootstrap.bundle.min.js"></script>
+<script src="js/jquery.scrollbar.min.js"></script>
+<script src="js/global.js"></script>
+<script src="js/export.js"></script>
+<script src="js/moment-with-locales.min.js"></script>
+</body>
+</html>

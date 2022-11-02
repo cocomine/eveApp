@@ -1,0 +1,107 @@
+<!--
+  ~ Copyright (c) 2021. By Cocomine
+  -->
+
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="utf-8">
+    <!--
+    Customize this policy to fit your own app's needs. For more guidance, see:
+        https://github.com/apache/cordova-plugin-whitelist/blob/master/README.md#content-security-policy
+    Some notes:
+        * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
+        * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
+        * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
+            * Enable inline JS: add 'unsafe-inline' to default-src
+    -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:; script-src 'self' 'unsafe-inline';">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
+    <meta name="color-scheme" content="light dark">
+    <link rel="stylesheet" href="../../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../css/themify-icons.css">
+    <link rel="stylesheet" href="../../css/font-awesome.min.css">
+    <link rel="stylesheet" href="../../css/bootstrap-icons.css">
+    <link rel="stylesheet" href="../../css/jquery.scrollbar.css">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/page/Notepad.css">
+    <title>備忘錄</title>
+    <!--link rel="icon" href="/img/logo.png"-->
+</head>
+<body>
+
+<!--頂部toolbar-->
+<div class="toolbar sticky-top shadow">
+    <div class="container-fluid h-100">
+        <div class="row justify-content-between align-items-center h-100">
+            <div class="col-auto">
+                <a href="index.html" aria-label="返回備忘錄">
+                    <span class="ti-arrow-left"></span>
+                </a>
+                <span class="toolbar-text">備忘錄</span>
+            </div>
+            <div class="col-auto">
+                <i class="bi bi-palette" id="Set-color" data-bs-toggle="modal" data-bs-target="#color-sel"></i>
+                <i class="bi bi-pin" id="Set-pin" data-pin="0"></i>
+                <i class="bi bi-trash" id="Delete"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--顏色選擇-->
+<div class="modal fade" id="color-sel" tabindex="-1" aria-labelledby="color-sel-title" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="color-sel-title">顏色選擇</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-center">
+                <div class="note-colo-sel-opt active" data-bg="bg-none"></div>
+                <div class="bg-white note-colo-sel-opt" data-bg="bg-white"></div>
+                <div class="bg-yellow note-colo-sel-opt" data-bg="bg-yellow"></div>
+                <div class="bg-orange note-colo-sel-opt" data-bg="bg-orange"></div>
+                <div class="bg-red note-colo-sel-opt" data-bg="bg-red"></div>
+                <div class="bg-green note-colo-sel-opt" data-bg="bg-green"></div>
+                <div class="bg-teal note-colo-sel-opt" data-bg="bg-teal"></div>
+                <div class="bg-cyan note-colo-sel-opt" data-bg="bg-cyan"></div>
+                <div class="bg-blue note-colo-sel-opt" data-bg="bg-blue"></div>
+                <div class="bg-purple note-colo-sel-opt" data-bg="bg-purple"></div>
+                <div class="bg-pink note-colo-sel-opt" data-bg="bg-pink"></div>
+                <div class="bg-gray note-colo-sel-opt" data-bg="bg-gray"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--正文-->
+<div class="main-container-full">
+    <div class="container-fluid h-100">
+        <form class="g-0 h-100" novalidate id="note-form">
+            <div class="row h-100 align-content-start pt-3">
+
+                <div class="col-auto date-pick">
+                    <input type="date" class="form-control" aria-label="日期" id="note-date" name="note-date">
+                </div>
+                <div class="col-12 title-input">
+                    <input aria-label="Title" type="text" autofocus class="form-control" id="note-title" name="note-title" maxlength="20" placeholder="Title">
+                </div>
+                <div class="col-12 content-input align-content-stretch">
+                    <textarea aria-label="內容" class="form-control" placeholder="備忘錄" id="note-content" name="note-content"></textarea>
+                </div>
+
+            </div>
+        </form>
+    </div>
+</div>
+<script src="../../cordova.js"></script>
+<script src="../../js/jquery-3.6.0.min.js"></script>
+<script src="../../js/bootstrap.bundle.min.js"></script>
+<script src="../../js/jquery.scrollbar.min.js"></script>
+<script src="../../js/global.js"></script>
+<script src="../../js/page/Notepad/note.js"></script>
+</body>
+</html>

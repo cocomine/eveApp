@@ -1,0 +1,114 @@
+<!--
+  ~ Copyright (c) 2021. By Cocomine
+  -->
+
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="utf-8">
+    <!--
+    Customize this policy to fit your own app's needs. For more guidance, see:
+        https://github.com/apache/cordova-plugin-whitelist/blob/master/README.md#content-security-policy
+    Some notes:
+        * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
+        * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
+        * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
+            * Enable inline JS: add 'unsafe-inline' to default-src
+    -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:; script-src 'self' 'unsafe-inline';">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
+    <meta name="color-scheme" content="light dark">
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/themify-icons.css">
+    <link rel="stylesheet" href="../css/font-awesome.min.css">
+    <link rel="stylesheet" href="../css/bootstrap-icons.css">
+    <link rel="stylesheet" href="../css/jquery.scrollbar.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <title>運輸記錄</title>
+    <!--link rel="icon" href="img/logo.png"-->
+</head>
+<body>
+
+<!--頂部toolbar-->
+<div class="shadow sticky-top" id="toolbar">
+    <div class="toolbar">
+        <div class="container-fluid h-100">
+            <div class="row justify-content-between align-items-center h-100">
+                <div class="col-auto">
+                    選擇存檔
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--正文-->
+<div class="main-container-full scrollbar-inner">
+    <div class="container-fluid h-100">
+        <div class="row">
+            <div class="col-12 setting-part pt-2 pb-1">
+                <span class="setting-title">不同存檔之間的數據及設定均是獨立並不通用, 最多只能開十個存檔<br>(名稱只作用識別用途, 不會更改真實檔案名稱亦不會一起備份)<br>單擊-開啟, 雙擊-改名, 長按-刪除</span>
+                <div class="row setting-body mt-1 pt-1 pb-1" data-save="0">
+                    <span class="col">未命名</span>
+                    <div class="w-100"></div>
+                    <small class="col">eveApp.db</small>
+                </div>
+                <div class="row setting-body pt-1 pb-1" data-save="1">
+                    <span class="col"><i>建立新存檔</i></span>
+                    <div class="w-100"></div>
+                    <small class="col">eveApp1.db</small>
+                </div>
+                <div class="row setting-body pt-1 pb-1" data-save="2">
+                    <span class="col"><i>建立新存檔</i></span>
+                    <div class="w-100"></div>
+                    <small class="col">eveApp2.db</small>
+                </div>
+                <div class="row setting-body pt-1 pb-1" data-save="3">
+                    <span class="col"><i>建立新存檔</i></span>
+                    <div class="w-100"></div>
+                    <small class="col">eveApp3.db</small>
+                </div>
+                <div class="row setting-body pt-1 pb-1" data-save="4">
+                    <span class="col"><i>建立新存檔</i></span>
+                    <div class="w-100"></div>
+                    <small class="col">eveApp4.db</small>
+                </div>
+                <div class="row setting-body pt-1 pb-1" data-save="5">
+                    <span class="col"><i>建立新存檔</i></span>
+                    <div class="w-100"></div>
+                    <small class="col">eveApp5.db</small>
+                </div>
+                <div class="row setting-body pt-1 pb-1" data-save="6">
+                    <span class="col"><i>建立新存檔</i></span>
+                    <div class="w-100"></div>
+                    <small class="col">eveApp6.db</small>
+                </div>
+                <div class="row setting-body pt-1 pb-1" data-save="7">
+                    <span class="col"><i>建立新存檔</i></span>
+                    <div class="w-100"></div>
+                    <small class="col">eveApp7.db</small>
+                </div>
+                <div class="row setting-body pt-1 pb-1" data-save="8">
+                    <span class="col"><i>建立新存檔</i></span>
+                    <div class="w-100"></div>
+                    <small class="col">eveApp8.db</small>
+                </div>
+                <div class="row setting-body pt-1 pb-1" data-save="9">
+                    <span class="col"><i>建立新存檔</i></span>
+                    <div class="w-100"></div>
+                    <small class="col">eveApp9.db</small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../cordova.js"></script>
+<script src="../js/jquery-3.6.0.min.js"></script>
+<script src="../js/bootstrap.bundle.min.js"></script>
+<script src="../js/jquery.scrollbar.min.js"></script>
+<script src="../js/moment-with-locales.min.js"></script>
+<script src="../js/page/save.js"></script>
+</body>
+</html>

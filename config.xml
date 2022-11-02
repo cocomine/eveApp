@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="com.cocomine.eve" version="1.1.366" android-versionCode="69" xmlns="http://www.w3.org/ns/widgets"
+        xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>運輸記錄</name>
+    <description>
+        一個簡單使用即時性嘅運輸紀錄程式
+    </description>
+    <author email="dev@cordova.apache.org" href="https://cordova.io">
+        Apache Cordova Team
+    </author>
+    <author email="roguish.6888467468@gmail.com" href="https://www.facebook.com/profile.php?id=100006297815529">
+        Cocomine
+    </author>
+    <content src="index.html"/>
+    <access origin="*"/>
+    <allow-intent href="https://*/*"/>
+    <allow-intent href="tel:*"/>
+    <allow-intent href="sms:*"/>
+    <allow-intent href="mailto:*"/>
+    <allow-intent href="geo:*"/>
+    <platform name="android">
+        <allow-intent href="market:*"/>
+        <icon src="assets/img/ldpi.png" density="ldpi"/>
+        <icon src="assets/img/mdpi.png" density="mdpi"/>
+        <icon src="assets/img/hdpi.png" density="hdpi"/>
+        <icon src="assets/img/xhdpi.png" density="xhdpi"/>
+        <icon src="assets/img/xxhdpi.png" density="xxhdpi"/>
+        <icon src="assets/img/xxxhdpi.png" density="xxxhdpi"/>
+        <preference name="AndroidXEnabled" value="true"/>
+        <preference name="JetifierEnabled" value="true"/>
+        <!--preference name="AndroidPersistentFileLocation" value="Compatibility" /-->
+        <preference name="StatusBarOverlaysWebView" value="false"/>
+        <preference name="android-minSdkVersion" value="29"/>
+        <resource-file src="src/NativePageTransitions.java"
+                       target="app/src/main/java/com/telerik/plugins/nativepagetransitions/NativePageTransitions.java"/>
+        <config-file parent="/manifest" target="AndroidManifest.xml"
+                     xmlns:android="http://schemas.android.com/apk/res/android">
+            <uses-permission android:name="android.permission.FLAG_GRANT_READ_URI_PERMISSION"/>
+        </config-file>
+        <config-file parent="/manifest/queries" target="AndroidManifest.xml"
+                     xmlns:android="http://schemas.android.com/apk/res/android">
+            <package android:name="com.google.android.gm"/>
+            <package android:name="com.microsoft.office.outlook"/>
+            <package android:name="com.yahoo.mobile.client.android.mail"/>
+            <intent>
+                <action android:name="android.support.customtabs.action.CustomTabsService"/>
+            </intent>
+        </config-file>
+    </platform>
+    <platform name="ios">
+        <allow-intent href="itms:*"/>
+        <allow-intent href="itms-apps:*"/>
+    </platform>
+    <preference name="StatusBarBackgroundColor" value="#127dff"/>
+    <icon src="assets/img/logo.png" width="234" height="214"/>
+</widget>

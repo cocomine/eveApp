@@ -1,0 +1,55 @@
+/*
+ * Copyright (c) 2022. By Cocomine
+ */
+
+/* Search page */
+
+/* search input */
+.search {
+    border: 1px gray solid;
+    background-color: #343a40;
+    border-radius: 10px;
+}
+
+.search input {
+    border: 0;
+    background-color: transparent;
+    width: 100%;
+    height: 100%;
+}
+
+.search input:focus-visible {
+    outline: none;
+}
+
+/* mode select btn */
+.btn {
+    border: 0;
+    padding: 1px;
+}
+
+.btn:active,
+.btn:hover {
+    background-color: transparent !important;
+    color: whitesmoke !important;
+}
+
+/* data-picker */
+#custom-mode input {
+    background-color: transparent;
+    border: 0;
+    width: 109px;
+    color: whitesmoke;
+}
+
+#custom-mode input::-webkit-datetime-edit {
+    padding: 0;
+}
+
+#custom-mode input::-webkit-inner-spin-button {
+    display: none;
+}
+
+#custom-mode input:focus-visible {
+    outline: none;
+}
